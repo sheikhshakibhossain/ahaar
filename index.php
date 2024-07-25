@@ -26,7 +26,7 @@
         <div class="hero-content">
             <h2>Help End Hunger in Our Community</h2>
             <p>Donate food and make a difference today.</p>
-            <button onclick="window.location.href='#donate'">Donate Now</button>
+            <button onclick="window.location.href='events.php'">Upcoming Events</button>
             <button onclick="window.location.href='#get-involved'">Get Involved</button>
         </div>
     </section>
@@ -34,7 +34,7 @@
     <section id="about">
         <div class="container">
             <h2>About Us</h2>
-            <p>Our mission is to end hunger in our community by facilitating food donations and volunteer work.</p>
+            <h4>Our mission is to end hunger in our community by facilitating food donations and volunteer work.</h4>
             <div class="stats">
                 <div>
                     <h3>10,000+</h3>
@@ -91,9 +91,10 @@
     <section id="get-involved">
         <div class="container">
             <h2>Get Involved</h2>
-            <p>Join us in our mission by volunteering or participating in our events.</p>
-            <button onclick="window.location.href='#volunteer'">Volunteer</button>
-            <button onclick="window.location.href='events.php'">Upcoming Events</button>
+            <h4>Join us in our mission by donating or volunteering or participating in our events.</h4>
+            <button onclick="window.location.href='volunteer_login.php'">Volunteer</button>
+            <button onclick="window.location.href='donor_login.php'">Donor</button>
+            <button onclick="window.location.href='sponsor_login.php'">Sponsor</button>
         </div>
     </section>
 
