@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Donation System</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <header>
@@ -53,19 +53,19 @@
             <h2>How It Works</h2>
             <div class="steps">
                 <div class="step">
-                    <img src="assets/collect.png" alt="Collect">
+                    <img src="assets/images/collect.png" alt="Collect">
                     <p>Collect</p>
                 </div>
                 <div class="step">
-                    <img src="assets/donate.png" alt="Donate">
+                    <img src="assets/images/donate.png" alt="Donate">
                     <p>Donate</p>
                 </div>
                 <div class="step">
-                    <img src="assets/distribute.png" alt="Distribute">
+                    <img src="assets/images/distribute.png" alt="Distribute">
                     <p>Distribute</p>
                 </div>
                 <div class="step">
-                    <img src="assets/support.png" alt="Support">
+                    <img src="assets/images/support.png" alt="Support">
                     <p>Support</p>
                 </div>
             </div>
@@ -116,6 +116,5 @@
         </section>  
     </footer>
 
-    <script src="scripts.js"></script>
 </body>
 </html>
