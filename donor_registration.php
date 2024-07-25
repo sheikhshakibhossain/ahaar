@@ -9,28 +9,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
     $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $postal_code = $_POST['postal_code'];
 
-    $query_ = "SELECT COUNT(*) FROM volunteer WHERE email = '$email'";
+    $query_ = "SELECT COUNT(*) FROM donor WHERE email = '$email'";
     $result_ = mysqli_query($connect, $query_);
     
     $count = mysqli_fetch_array($result_)[0];
 
     if ($count > 0) {
-        echo "User Already exists";
+        echo "Donor Already exists";
     } else {
 
         // Insert data into database
-        $query = "INSERT INTO volunteer(name, email, passwd, phone, gender) 
-                VALUES ('$username', '$email', '$password', '$phone', '$gender')";
+        $query = "INSERT INTO donor(name, email, passwd, phone, gender, address, postal_code) 
+                VALUES ('$username', '$email', '$password', '$phone', '$gender', '$address', '$postal_code')";
 
         $result = mysqli_query($connect, $query);
 
         if ($result) {
             echo "Registration Success";
-            header("Location: volunteer_login.php"); // redirecting page
+            header("Location: donor_login.php"); // redirecting page
             exit(); // no further code is executed after the redirection
         } else {
-            echo "Volunteer Registration failed!";
+            echo "Donor Registration failed!";
 
         }
     }
@@ -51,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
         <div class="title">Registration</div>
         <div class="content">
-            <form action="volunteer_registration.php" method="POST">
+            <form action="donor_registration.php" method="POST">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Username</span>
@@ -61,6 +63,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="details">Email</span>
                         <input type="text" name="email" placeholder="Enter your email" required>
                     </div>
+
+                    <div class="input-box">
+                        <span class="details">Address</span>
+                        <input type="text" name="address" placeholder="Enter your Address" required>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Postal Code</span>
+                        <input type="text" name="postal_code" placeholder="Enter your Postal Code" required>
+                    </div>
+                    
                     <div class="input-box">
                         <span class="details">Phone Number</span>
                         <input type="text" name="phone" placeholder="Enter your number" required>
@@ -69,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="details">Password</span>
                         <input type="password" name="password" placeholder="Enter your password" required>
                     </div>
+
                 </div>
                 <div class="gender-details">
                     <input type="radio" name="gender" id="dot-1" value="Male" required>

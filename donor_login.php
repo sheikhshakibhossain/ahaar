@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once('dbconfig.php');
     $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 
-    $query = "SELECT COUNT(*) FROM volunteer WHERE email = '$email' AND passwd = '$password'";
+    $query = "SELECT COUNT(*) FROM donor WHERE email = '$email' AND passwd = '$password'";
     $result = mysqli_query($connect, $query);
     
     $count = mysqli_fetch_array($result)[0];
@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Invalid email or password";
     }
     else if ($count >= 1) {
-        include ("session.php");
+        include("session.php");
         $_SESSION['email'] = $email;
             echo "Login Success!";
-            header("Location: volunteer.php"); // redirecting page
+            header("Location: donor.php"); // redirecting page
             exit(); // no further code is executed after the redirection
         } else {
             echo "Login failed!";
@@ -31,13 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
-    <title>Volunteer Login</title>
+    <title>Donor Login</title>
     <link rel="stylesheet" href="assets/login.css">
 </head>
 <body>
     <div class="wrapper">
         <div class="title">Login</div>
-        <form action="volunteer_login.php" method="POST">
+        <form action="donor_login.php" method="POST">
             <div class="field">
                 <input type="text" name="email" required>
                 <label>Email Address</label>
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="submit" value="Login">
             </div>
             <div class="signup-link">
-                Not a member? <a href="volunteer_registration.php">Signup now</a>
+                Not a member? <a href="donor_registration.php">Signup now</a>
             </div>
         </form>
     </div>

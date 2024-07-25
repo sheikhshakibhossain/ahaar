@@ -27,6 +27,7 @@
             <h2>Help End Hunger in Our Community</h2>
             <p>Donate food and make a difference today.</p>
             <button onclick="window.location.href='events.php'">Upcoming Events</button>
+            <button onclick="window.location.href='sponsors.php'">Our Sponsors</button>
             <button onclick="window.location.href='#get-involved'">Get Involved</button>
         </div>
     </section>
@@ -94,7 +95,6 @@
             <h4>Join us in our mission by donating or volunteering or participating in our events.</h4>
             <button onclick="window.location.href='volunteer_login.php'">Volunteer</button>
             <button onclick="window.location.href='donor_login.php'">Donor</button>
-            <button onclick="window.location.href='sponsor_login.php'">Sponsor</button>
         </div>
     </section>
 
@@ -103,7 +103,7 @@
         <div class="container">
             <div class="contact-info">
                 <h3>Contact Us</h3>
-                <p>Address: 1100 Wari, Dhaka, Bangladesh</p>
+                <p>Address: Dhaka, Bangladesh</p>
                 <p>Phone: (+880) 192123123</p>
                 <p>Email: info@ahaar.com</p>
                 <div class="social-media">
