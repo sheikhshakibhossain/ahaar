@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#hero {
+    background: url('assets/donation.png');
+    color: white;
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+}
+
+.hero-content h2 {
+    font-size: 3rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+}
+
+.hero-content button {
+    background-color: #FF5722;
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.hero-content button:hover {
+    background-color: #E64A19;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.stats div {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.step img {
+    width: 250px;
+    height: 250px;
+}
+
+.stories {
+    display: flex;
+    justify-content: space-around;
+}
+
+.story {
+    text-align: center;
+}
+
+.story img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.contact-info, .newsletter {
+    margin-bottom: 1rem;
+}
+
+.social-media a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
