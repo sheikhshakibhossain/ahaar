@@ -1,3 +1,6 @@
+<!-- INSERT INTO volunteer(`name`, `email`, `passwd`, `phone`, `gender`) VALUES ('person','person@email.com','1234','0192321323','Male') -->
+
+
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
