@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="gender-details">
                     <input type="radio" name="user_type" id="dot-4" value="Regular" onclick="toggleRestaurantName()" required>
                     <input type="radio" name="user_type" id="dot-5" value="Restaurant Owner" onclick="toggleRestaurantName()">
-                    <span class="gender-title">User Type</span>
+                    <span class="gender-title">Donor Type</span>
                     <div class="category">
                         <label for="dot-4">
                             <span class="dot four"></span>
