@@ -28,7 +28,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: #E9EAEA;
+            background: linear-gradient(135deg, #30b7e6, #3aaa3c);
         }
         #container {
             width: 90%;
@@ -42,9 +42,9 @@
         #container h2 {
             width: 100%;
             text-align: center;
-            color: #8B4513;
+            color: #FFF;
             font-weight: 500;
-            font-size: 28px;
+            font-size: 40px;
             margin-bottom: 30px;
         }
         .user {
