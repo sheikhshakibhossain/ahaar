@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $gender = $_POST['gender'];
 
-    $query_ = "SELECT COUNT(*) FROM volunteer WHERE email = '$email'";
+    $query_ = "SELECT COUNT(*) FROM recipient WHERE email = '$email'";
     $result_ = mysqli_query($connect, $query_);
     
     $count = mysqli_fetch_array($result_)[0];
@@ -20,17 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
 
         // Insert data into database
-        $query = "INSERT INTO volunteer(name, email, passwd, phone, gender) 
+        $query = "INSERT INTO recipient(name, email, passwd, phone, gender) 
                 VALUES ('$username', '$email', '$password', '$phone', '$gender')";
 
         $result = mysqli_query($connect, $query);
 
         if ($result) {
             echo "Registration Success";
-            header("Location: volunteer_login.php"); // redirecting page
+            header("Location: recipient_login.php"); // redirecting page
             exit(); // no further code is executed after the redirection
         } else {
-            echo "Volunteer Registration failed!";
+            echo "recipient Registration failed!";
 
         }
     }
@@ -43,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Volunteer Registration</title>
+    <title>recipient Registration</title>
     <link rel="stylesheet" href="assets/registration.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div class="container">
-        <div class="title">Registration</div>
+        <div class="title">Recipient Registration</div>
         <div class="content">
-            <form action="volunteer_registration.php" method="POST">
+            <form action="recipient_registration.php" method="POST">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Username</span>

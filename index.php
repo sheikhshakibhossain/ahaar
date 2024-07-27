@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Donation System</title>
+    <title>A H A A R</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Food Donation System</h1>
+            <h1>A H A A R</h1>
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -35,7 +35,7 @@
     <section id="about">
         <div class="container">
             <h2>About Us</h2>
-            <h4>Our mission is to end hunger in our community by facilitating food donations and volunteer work.</h4>
+            <h4>Our mission is to end hunger in our community by facilitating food donations to recipient.</h4>
             <div class="stats">
                 <div>
                     <h3>10,000+</h3>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="story">
                     <img src="story2.jpg" alt="Story 2">
-                    <p>Anna was able to volunteer and make a significant impact in her community.</p>
+                    <p>Anna was able to recipient and make a significant impact in her community.</p>
                 </div>
             </div>
         </div>
@@ -92,8 +92,8 @@
     <section id="get-involved">
         <div class="container">
             <h2>Get Involved</h2>
-            <h4>Join us in our mission by donating or volunteering or participating in our events.</h4>
-            <button onclick="window.location.href='volunteer_login.php'">Volunteer</button>
+            <h4>Join us in our mission by donating or participating in our events.</h4>
+            <button onclick="window.location.href='recipient_login.php'">Recipient</button>
             <button onclick="window.location.href='donor_login.php'">Donor</button>
         </div>
     </section>

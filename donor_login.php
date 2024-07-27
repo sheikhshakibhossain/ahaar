@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="wrapper">
-        <div class="title">Login</div>
+        <div class="title">Donor Login</div>
         <form action="donor_login.php" method="POST">
             <div class="field">
                 <input type="text" name="email" required>
