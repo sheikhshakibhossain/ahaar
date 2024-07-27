@@ -3,7 +3,7 @@
     require_once('dbconfig.php');
     $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
     
-    $results = mysqli_query($connect, "SELECT email FROM donor WHERE donor.email = (SELECT email FROM sponsors)")
+    $results = mysqli_query($connect, "SELECT email FROM donor WHERE donor.email IN (SELECT email FROM sponsors)")
         or die("Can not execute query");
     
     $sponsors = [];
@@ -116,23 +116,33 @@
     // Loop through each sponsor ID and fetch their details
     foreach ($sponsors as $sponsor_email) {
         
-        $sponsor_query = mysqli_query($connect, "SELECT name, phone, email, address FROM donor WHERE email = '$sponsor_email'");
+        $sponsor_query = mysqli_query($connect, "SELECT name, phone, email, address, restaurant_name FROM donor WHERE email = '$sponsor_email'");
         $sponsor_data = mysqli_fetch_assoc($sponsor_query);
     ?>
 
     <a class="user">
-        <!-- <?php 
+        <?php 
             $profile_picture = 'uploads/' . $sponsor_email . '.jpg';
             if (!file_exists($profile_picture)) {
                 $num = $id % 6;
                 $profile_picture = 'assets/avatar/' . $num . '.png';
             }
-        ?> -->
-        <!-- <img class="rounded-circle mt-3" width="150px" src="<?php echo $profile_picture; ?>"> -->
+            
+        ?>
+        <img class="rounded-circle mt-3" width="150px" src="<?php echo $profile_picture; ?>">
         <p class="name"><?php echo $sponsor_data['name']; ?></p>
         <p class="email"><?php echo $sponsor_data['phone']; ?></p>
         <p class="email"><?php echo $sponsor_data['email']; ?></p>
         <p class="address"><?php echo $sponsor_data['address']; ?></p>
+        <p class="location">
+            <?php
+                if ($sponsor_data['restaurant_name'] != null) {
+                    $restaurant_name = $sponsor_data['restaurant_name']; 
+                    $restaurant_name = "Owner at ". $restaurant_name;
+                    echo $restaurant_name;
+                }
+            ?>
+        </p>
     </a>
     <?php
     }

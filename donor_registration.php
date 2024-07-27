@@ -4,15 +4,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once('dbconfig.php');
     $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $password = $_POST['password'];
-    $gender = $_POST['gender'];
-    $address = $_POST['address'];
-    $postal_code = $_POST['postal_code'];
-    $user_type = $_POST['user_type'];
-    $restaurant_name = isset($_POST['restaurant_name']) ? $_POST['restaurant_name'] : null;
+    // capture and sanitize user input
+    $username = mysqli_real_escape_string($connect, $_POST['username']);
+    $email = mysqli_real_escape_string($connect, $_POST['email']);
+    $phone = mysqli_real_escape_string($connect, $_POST['phone']);
+    $password = mysqli_real_escape_string($connect, $_POST['password']);
+    $gender = mysqli_real_escape_string($connect, $_POST['gender']);
+    $address = mysqli_real_escape_string($connect, $_POST['address']);
+    $postal_code = mysqli_real_escape_string($connect, $_POST['postal_code']);
+    $user_type = mysqli_real_escape_string($connect, $_POST['user_type']);
+    $restaurant_name = isset($_POST['restaurant_name']) ? mysqli_real_escape_string($connect, $_POST['restaurant_name']) : null;
+
 
     $query_ = "SELECT COUNT(*) FROM donor WHERE email = '$email'";
     $result_ = mysqli_query($connect, $query_);
@@ -136,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="user-details" id="restaurant_name_field" style="display: none;">
                     <div class="input-box">
                         <span class="details">Restaurant Name</span>
-                        <input type="text" name="restaurant_name" placeholder="Enter restaurant name">
+                        <input type="text" name="restaurant_name" placeholder="Enter restaurant name" required>
                     </div>
                 </div>
 
