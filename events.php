@@ -62,8 +62,6 @@ if (isset($_GET['take_donation'])) {
 ?>
 
 
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
