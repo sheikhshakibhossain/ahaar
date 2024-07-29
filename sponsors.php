@@ -122,18 +122,25 @@
 
     <a class="user">
         <?php 
-            $profile_picture = 'uploads/' . $sponsor_email . '.jpg';
-            if (!file_exists($profile_picture)) {
-                $num = $id % 6;
-                $profile_picture = 'assets/avatar/' . $num . '.png';
-            }
-            
+            $profile_picture = 'donor/profile.svg';
         ?>
         <img class="rounded-circle mt-3" width="150px" src="<?php echo $profile_picture; ?>">
         <p class="name"><?php echo $sponsor_data['name']; ?></p>
-        <p class="email"><?php echo $sponsor_data['phone']; ?></p>
-        <p class="email"><?php echo $sponsor_data['email']; ?></p>
-        <p class="address"><?php echo $sponsor_data['address']; ?></p>
+        <p class="email"><?php echo $sponsor_data['address']; ?></p>
+
+        <p class="address">
+            <?php
+                $email = $sponsor_data['email'];
+                $query_ = "SELECT SUM(quantity) FROM donation WHERE donor_email = '$email'";
+                $result_ = mysqli_query($connect, $query_);
+                $donation_count = mysqli_fetch_array($result_)[0];
+
+                if ($donation_count > 0) {
+                    $donation_count = "Total Meals Donated: ". $donation_count;
+                    echo $donation_count;
+                }
+            ?>
+        </p>
         <p class="location">
             <?php
                 if ($sponsor_data['restaurant_name'] != null) {

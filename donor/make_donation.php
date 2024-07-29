@@ -13,10 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $location = mysqli_real_escape_string($connect, $_POST['location']);
     $expire_date_time = mysqli_real_escape_string($connect, $_POST['expire_date_time']);
     $postal_code = mysqli_real_escape_string($connect, $_POST['postal_code']);
+    $quantity_available = $quantity;
 
     // Insert data into the database
-    $query = "INSERT INTO donation (food_name, quantity, location, expire_date_time, donor_email, postal_code) 
-              VALUES ('$food_name', '$quantity', '$location', '$expire_date_time', '$email', '$postal_code')";
+    $query = "INSERT INTO donation (food_name, quantity, location, expire_date_time, donor_email, postal_code, quantity_available) 
+              VALUES ('$food_name', '$quantity', '$location', '$expire_date_time', '$email', '$postal_code', '$quantity_available')";
 
     $result = mysqli_query($connect, $query);
 
