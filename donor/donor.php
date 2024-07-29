@@ -57,6 +57,11 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
                 <a href="../events.php"> <button>Event</button></a>
             </h4>
         </div>
+
+        <div class="logout">
+            <a href="../logout.php"><button>Logout</button></a>
+        </div>
+
     </div>
 
     <!-- donation history -->
