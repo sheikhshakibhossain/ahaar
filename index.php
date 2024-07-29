@@ -1,5 +1,17 @@
 <?php
-    include("session.php");
+
+require_once('dbconfig.php');
+include('session.php');
+
+$connect = mysqli_connect(HOST, USER, PASS, DB) or die("Cannot connect");
+$count_query = "SELECT SUM(quantity) FROM donation";
+$result = mysqli_query($connect, $count_query);
+$meals_donated = mysqli_fetch_array($result)[0];
+
+$count_query = "SELECT COUNT(DISTINCT email) FROM recipient";
+$result = mysqli_query($connect, $count_query);
+$helped_people = mysqli_fetch_array($result)[0];
+
 ?>
 
 <!DOCTYPE html>
@@ -42,11 +54,11 @@
             <h4>Our mission is to end hunger in our community by facilitating food donations to recipient.</h4>
             <div class="stats">
                 <div>
-                    <h3>10,000+</h3>
+                    <h3><?php echo $meals_donated; ?></h3>
                     <p>Meals Donated</p>
                 </div>
                 <div>
-                    <h3>5,000+</h3>
+                <h3><?php echo $helped_people; ?></h3>
                     <p>Families Helped</p>
                 </div>
             </div>
