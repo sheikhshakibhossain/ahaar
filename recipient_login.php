@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         include ("session.php");
         $_SESSION['email'] = $email;
             echo "Login Success!";
-            header("Location: recipient.php"); // redirecting page
+            header("Location: recipient/recipient.php"); // redirecting page
             exit(); // no further code is executed after the redirection
         } else {
             echo "Login failed!";

@@ -1,0 +1,133 @@
+:root {
+    --white: #FFFFFF;
+    --grey: #E8E8E8;
+    --primarytext: #3A3A3A;
+    --secondarytext: #8C8B8B;
+    --blue: #2869FE;
+    --blue2: #5186FF;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #71b7e6, #aa3a3a);
+}
+
+.profile-container{
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px var(--secondarytext);
+}
+
+.img{
+    background-size: 100px;
+    background: url(profile.svg);
+    height: 100px;
+    width: 88px;
+    background-position: center center;
+    margin-bottom: 10px;
+}
+
+.bi{
+    background-image: radial-gradient(var(--blue), var(--blue2));
+    padding: 10px;
+    color: var(--white);
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px var(--secondarytext);
+    margin: 10px;
+    margin-bottom: 200px;
+    row-gap: 200px;
+}
+
+
+h3, h6{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h6{
+    color: var(--secondarytext);
+}
+
+h3{
+    color: var(--primarytext);
+    margin: 5px 0;
+}
+
+.contact-info {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: var(--secondarytext);
+    margin-bottom: 5px;
+    row-gap: 10px;
+}
+
+.previous-donations {
+    width: 100%;
+    text-align: center;
+}
+
+.previous-donations h4 {
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--primarytext);
+}
+
+.donation {
+    background-color: var(--grey);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.donation p {
+    margin: 0;
+    color: var(--primarytext);
+}
+
+.interest{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    color: #3A3A3A;
+    
+}
+
+.event-container{
+    padding: 25px;
+    background-color: rgb(240, 231, 217);
+    display: flex;   
+    gap: 30px;
+    justify-content: center;
+    max-height: 100%;
+    align-items: center;
+    flex-direction: row ;  
+    flex-wrap: wrap;
+
+
+
+}
+
+.event{
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid rgb(164, 210, 228);
+    background: rgb(178, 228, 229);
+    padding: 20px;
+    font-size: 14px;
+    
+   }
