@@ -75,7 +75,7 @@ if (isset($_GET['take_donation'])) {
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #30b7e6, #3aaa3c);
+            background: linear-gradient(135deg, #301934, #FFA500);
         }
         #container {
             width: 90%;
