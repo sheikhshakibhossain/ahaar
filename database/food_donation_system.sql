@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 29, 2024 at 10:28 PM
+-- Generation Time: Jul 29, 2024 at 11:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `food_donation_system`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disaster_alert`
+--
+
+CREATE TABLE `disaster_alert` (
+  `id` int(11) NOT NULL,
+  `title` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `disaster_alert`
+--
+
+INSERT INTO `disaster_alert` (`id`, `title`) VALUES
+(1, 'Quota movement 2024');
 
 -- --------------------------------------------------------
 
@@ -150,6 +168,12 @@ INSERT INTO `sponsors` (`email`) VALUES
 --
 
 --
+-- Indexes for table `disaster_alert`
+--
+ALTER TABLE `disaster_alert`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `donation`
 --
 ALTER TABLE `donation`
@@ -170,6 +194,12 @@ ALTER TABLE `recipient`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `disaster_alert`
+--
+ALTER TABLE `disaster_alert`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `donation`
