@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
     $password = $_POST['password'];
     $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $postal_code = $_POST['postal_code'];
 
     $query_ = "SELECT COUNT(*) FROM recipient WHERE email = '$email'";
     $result_ = mysqli_query($connect, $query_);
@@ -20,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
 
         // Insert data into database
-        $query = "INSERT INTO recipient(name, email, passwd, phone, gender) 
-                VALUES ('$username', '$email', '$password', '$phone', '$gender')";
+        $query = "INSERT INTO recipient(name, email, passwd, phone, gender, address, postal_code) 
+                VALUES ('$username', '$email', '$password', '$phone', '$gender', '$address', '$postal_code')";
 
         $result = mysqli_query($connect, $query);
 
@@ -61,6 +63,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <span class="details">Email</span>
                         <input type="text" name="email" placeholder="Enter your email" required>
                     </div>
+
+                    <div class="input-box">
+                        <span class="details">Address</span>
+                        <input type="text" name="address" placeholder="Enter your Address" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Postal Code</span>
+                        <input type="text" name="postal_code" placeholder="Enter your Postal Code" required>
+                    </div>
+
                     <div class="input-box">
                         <span class="details">Phone Number</span>
                         <input type="text" name="phone" placeholder="Enter your number" required>
