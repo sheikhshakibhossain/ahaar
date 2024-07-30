@@ -6,7 +6,8 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
+    background: linear-gradient(135deg, #30b7e6, #3aaa3c);
     color: white;
     padding: 1rem 0;
     text-align: center;
@@ -48,16 +49,19 @@ nav ul li a {
 }
 
 .hero-content button {
-    background-color: #22b9ffde;
+    /* background-color: #22b9ffde; */
+    background: linear-gradient(135deg, #30e6d7, #dc36fd);
     border: none;
     color: white;
     padding: 1rem 2rem;
     margin: 0.5rem;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .hero-content button:hover {
-    background-color: #E64A19;
+    /* background-color: #E64A19; */
+    background: linear-gradient(135deg, #30b7e6, #973aaa);
 }
 
 .container {
@@ -67,12 +71,19 @@ nav ul li a {
 }
 
 .container button {
-    background-color: #068506;
+    /* background-color: #068506; */
+    background: linear-gradient(135deg, #18ffba, #dc36fd);
     border: none;
     color: white;
     padding: 1rem 2rem;
     margin: 0.5rem;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.container button:hover {
+    /* background-color: #E64A19; */
+    background: linear-gradient(135deg, #30b7e6, #973aaa);
 }
 
 h2 {
@@ -87,7 +98,8 @@ h2 {
 }
 
 .stats div {
-    background-color: #4CAF50;
+    /* background-color: #4CAF50; */
+    background: linear-gradient(135deg, #30b7e6, #3aaa3c);
     color: white;
     padding: 1rem;
     border-radius: 8px;

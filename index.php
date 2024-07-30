@@ -84,7 +84,7 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
             border: 1px solid #888;
             width: 80%;
             max-width: 500px;
-            border-radius: 10px;
+            border-radius: 30px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             font-size: larger;
             color: white;
