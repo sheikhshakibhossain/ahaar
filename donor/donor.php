@@ -5,13 +5,14 @@ require_once('../dbconfig.php');
 $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 
 $email = $_SESSION['email'];
-$query_ = "SELECT name, phone, address FROM donor WHERE email = '$email'";
+$query_ = "SELECT name, phone, address, gender FROM donor WHERE email = '$email'";
 $result_ = mysqli_query($connect, $query_);
 $row = mysqli_fetch_array($result_);
 
 $name = $row['name'];
 $phone = $row['phone'];
 $address = $row['address'];
+$gender = $row['gender'];
 
 // Fetch the donations made by the user
 $donations_query = "SELECT food_name, quantity, location, expire_date_time FROM donation WHERE donor_email = '$email'";
@@ -38,7 +39,16 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
 
     <!-- profile -->
     <div class="profile-container">
-        <div class="img"></div>
+
+        <?php
+            if ($gender == "Female") {
+                $photo_name = "../assets/images/girl.jpg";
+            } else {
+                $photo_name = "profile.svg";
+            }   
+        ?>
+        
+        <div class="img" style="background-image: url('<?php echo $photo_name; ?>');"></div>
         <h3> <?php echo $name; ?> </h3>
         <h6>Donor</h6>
         

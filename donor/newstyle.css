@@ -29,14 +29,15 @@ body{
     box-shadow: 2px 2px 5px var(--secondarytext);
 }
 
-.img{
-    background-size: 100px;
-    background: url(profile.svg);
-    height: 100px;
+.img {
     width: 88px;
+    height: 100px;
+    background-size: contain; /* Ensures the entire image fits within the div */
+    background-repeat: no-repeat; /* Prevents repeating the image */
     background-position: center center;
     margin-bottom: 10px;
 }
+
 
 .bi{
     background-image: radial-gradient(var(--blue), var(--blue2));

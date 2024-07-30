@@ -116,13 +116,17 @@
     // Loop through each sponsor ID and fetch their details
     foreach ($sponsors as $sponsor_email) {
         
-        $sponsor_query = mysqli_query($connect, "SELECT name, phone, email, address, restaurant_name FROM donor WHERE email = '$sponsor_email'");
+        $sponsor_query = mysqli_query($connect, "SELECT name, phone, email, address, restaurant_name, gender FROM donor WHERE email = '$sponsor_email'");
         $sponsor_data = mysqli_fetch_assoc($sponsor_query);
     ?>
 
     <a class="user">
         <?php 
             $profile_picture = 'donor/profile.svg';
+            $gender = $sponsor_data['gender'];
+            if ($gender == "Female") {
+                $profile_picture = "assets/images/girl.jpg";
+            }
         ?>
         <img class="rounded-circle mt-3" width="150px" src="<?php echo $profile_picture; ?>">
         <p class="name"><?php echo $sponsor_data['name']; ?></p>
