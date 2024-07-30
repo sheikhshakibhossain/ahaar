@@ -1,14 +1,14 @@
 <?php
 include('../session.php');
 
-// // Ensure only authorized users can access this page
-// if (isset($_SESSION['email']) && $_SESSION['user_type'] == 'admin') {
-//     $email = $_SESSION['email'];
-// } else {
-//     echo "<script>alert('Access denied. Only admins can review applications.');</script>";
-//     echo "<script>window.location.href = 'donor_login.php';</script>";
-//     exit();
-// }
+// Ensure only authorized users can access this page
+if (isset($_SESSION['email']) && $_SESSION['user_type'] == 'admin') {
+    $email = $_SESSION['email'];
+} else {
+    echo "<script>alert('Access denied. Only admins can review applications.');</script>";
+    echo "<script>window.location.href = 'index.php';</script>";
+    exit();
+}
 
 require_once('../dbconfig.php');
 $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Cannot connect");
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<script>alert('Failed to reject application!');</script>";
         }
     }
-    echo "<script>window.location.href = 'review_sponsor_application.php';</script>";
+    echo "<script>window.location.href = 'dashboard.php';</script>";
 }
 
 // Fetch all queued sponsor applications
@@ -66,7 +66,7 @@ $result = mysqli_query($connect, $query);
                         <div class="input-box">
                             <span class="details">Description: <?php echo $row['description']; ?></span>
                         </div>
-                        <form action="review_sponsor_application.php" method="POST">
+                        <form action="dashboard.php" method="POST">
                             <input type="hidden" name="email" value="<?php echo $row['email']; ?>">
                             <button type="submit" name="action" value="accept">Accept</button>
                             <button type="submit" name="action" value="reject">Reject</button>
@@ -77,6 +77,11 @@ $result = mysqli_query($connect, $query);
                 <p>No queued applications.</p>
             <?php endif; ?>
         </div>
+
+        <br> <br> <br>
+        <a href="../logout.php"><button>Logout</button></a>
+
     </div>
+
 </body>
 </html>
