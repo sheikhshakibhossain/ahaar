@@ -7,13 +7,14 @@ $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 $email = $_SESSION['email'];
 
 // Fetch recipient details
-$query_ = "SELECT name, phone, address FROM recipient WHERE email = '$email'";
+$query_ = "SELECT name, phone, address, gender FROM recipient WHERE email = '$email'";
 $result_ = mysqli_query($connect, $query_);
 $row = mysqli_fetch_array($result_);
 
 $name = $row['name'];
 $phone = $row['phone'];
 $address = $row['address'];
+$gender = $row['gender'];
 
 // Fetch donations taken by the recipient
 $donations_query = "SELECT d.food_name, d.quantity, d.location, d.expire_date_time 
@@ -44,7 +45,14 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
 
     <!-- profile -->
     <div class="profile-container">
-        <div class="img"></div>
+        <?php
+            if ($gender == "Female") {
+                $photo_name = "../assets/images/girl.jpg";
+            } else {
+                $photo_name = "profile.svg";
+            }   
+        ?>
+        <div class="img" style="background-image: url('<?php echo $photo_name; ?>');"></div>
         <h3> <?php echo htmlspecialchars($name); ?> </h3>
         <h6>Recipient</h6>
         
