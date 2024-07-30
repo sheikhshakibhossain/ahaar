@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else if ($count >= 1) {
         include("session.php");
         $_SESSION['email'] = $email;
+        $_SESSION['user_type'] = 'donor';
             echo "Login Success!";
             header("Location: donor/donor.php"); // redirecting page
             exit(); // no further code is executed after the redirection

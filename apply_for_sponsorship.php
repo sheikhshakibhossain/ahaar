@@ -2,7 +2,7 @@
 
 include('session.php');
 
-if (isset($_SESSION['email'])) {
+if (isset($_SESSION['email']) && $_SESSION['user_type'] == 'donor') {
     $email = $_SESSION['email'];
 } else {
     echo "<script>alert('Please login first');</script>";
