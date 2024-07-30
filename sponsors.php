@@ -109,9 +109,21 @@
     </style>
 </head>
 <body>
+    
+<div id="container">
+    <h2>Who is a Sponsor? 📣</h2>
+    <h3 style="color: #E1F7F5">
+        Donor who are willing to donate in a daily basis. 
+        For an example, if you're a restaurant owner or someone with huge food stocks,
+        you can donate your extra foods daily. If you agree with this simple term that 
+        you will donate (daily/some days in a week/weekly/monthly), 
+        you can apply for the <a href="apply_for_sponsorship.php" style="color: #E1F7F5">Sponsor's</a> title 📝🤝🏻
+    </h3>
+    <br> <br>
+</div>
 
 <div id="container">
-    <h2>Our Sponsors</h2>
+    <h2>Our Sponsors 👑</h2>
     <?php
     // Loop through each sponsor ID and fetch their details
     foreach ($sponsors as $sponsor_email) {
@@ -159,6 +171,7 @@
     }
     ?>
 </div>
+
 
 
 </body>
