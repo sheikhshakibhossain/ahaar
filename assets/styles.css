@@ -29,11 +29,13 @@ nav ul li a {
 }
 
 #hero {
-    background: url('images/donation.png');
+    background: url('images/ahaar.png') no-repeat center center;
+    background-size: cover;
     color: white;
     text-align: center;
     padding: 4rem 0;
 }
+
 
 .hero-content {
     background: rgba(0, 0, 0, 0.5);
