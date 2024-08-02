@@ -38,9 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $query = "UPDATE donation_taken SET feedback = '$feedback' WHERE donation_id = '$donation_id' AND recipient_email = '$email'";
     if (mysqli_query($connect, $query)) {
-        $message = 'Feedback updated successfully';
+        header('Location: recipient.php');
+        exit();
     } else {
-        $message = 'Failed to update feedback';
+        echo "<script>alert('Failed to update feedback');</script>";
     }
 }
 
@@ -105,9 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form method="POST" class="food-item-form">
                                 <input type="hidden" name="donation_id" value="<?php echo $donation['donation_id']; ?>">
                                 <select name="feedback">
-                                    <option value="Good" <?php if ($donation['feedback'] == 'Good') echo 'selected'; ?>>Good</option>
-                                    <option value="Average" <?php if ($donation['feedback'] == 'Average') echo 'selected'; ?>>Average</option>
-                                    <option value="Rotten" <?php if ($donation['feedback'] == 'Rotten') echo 'selected'; ?>>Rotten</option>
+                                    <?php
+                                    // Set default feedback if NULL
+                                    $feedback = $donation['feedback'] ?? 'Select';
+                                    ?>
+                                    <option value="Select" <?php if ($feedback == 'Select') echo 'selected'; ?>>Select</option>
+                                    <option value="Good" <?php if ($feedback == 'Good') echo 'selected'; ?>>Good</option>
+                                    <option value="Average" <?php if ($feedback == 'Average') echo 'selected'; ?>>Average</option>
+                                    <option value="Rotten" <?php if ($feedback == 'Rotten') echo 'selected'; ?>>Rotten</option>
                                 </select>
                                 <button type="submit">Submit Feedback</button>
                             </form>
@@ -117,10 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-
-    <?php if (isset($message)): ?>
-        <script>alert('<?php echo $message; ?>');</script>
-    <?php endif; ?>
 
 </body>
 </html>
