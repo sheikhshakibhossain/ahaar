@@ -1,6 +1,8 @@
 <?php
 
 include("../session.php");
+include("../check_user.php");
+
 require_once('../dbconfig.php');
 $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 
@@ -17,7 +19,7 @@ $address = $row['address'];
 $gender = $row['gender'];
 
 // Fetch donations taken by the recipient
-$donations_query = "SELECT d.food_name, d.quantity, d.location, d.expire_date_time 
+$donations_query = "SELECT d.food_name, d.quantity, d.location, d.expire_date_time, d.donation_id
                     FROM donation_taken dt 
                     JOIN donation d ON dt.donation_id = d.donation_id 
                     WHERE dt.recipient_email = '$email'";
@@ -87,6 +89,7 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
                             <h3><?php echo $donation['food_name']; ?></h3>
                             <p>Location: <?php echo $donation['location']; ?></p>
                             <p>Expires on: <?php echo $donation['expire_date_time']; ?></p>
+                            <a href="report_donation.php?id=<?php echo $donation['donation_id']?>"><button>Report</button></a>
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>

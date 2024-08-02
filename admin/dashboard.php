@@ -1,5 +1,6 @@
 <?php
 include('../session.php');
+include("../check_user.php");
 
 // Ensure only authorized users can access this page
 if (isset($_SESSION['email']) && $_SESSION['user_type'] == 'admin') {
