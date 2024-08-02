@@ -18,8 +18,8 @@ $phone = $row['phone'];
 $address = $row['address'];
 $gender = $row['gender'];
 
-// Fetch donations taken by the recipient
-$donations_query = "SELECT d.food_name, d.quantity, d.location, d.expire_date_time, d.donation_id
+// Fetch donations taken by the recipient including existing feedback
+$donations_query = "SELECT d.food_name, d.quantity, d.location, d.expire_date_time, d.donation_id, dt.feedback
                     FROM donation_taken dt 
                     JOIN donation d ON dt.donation_id = d.donation_id 
                     WHERE dt.recipient_email = '$email'";
@@ -29,6 +29,7 @@ $donations = [];
 while ($donation_row = mysqli_fetch_assoc($donations_result)) {
     $donations[] = $donation_row;
 }
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $donation_id = mysqli_real_escape_string($connect, $_POST['donation_id']);
@@ -104,13 +105,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form method="POST" class="food-item-form">
                                 <input type="hidden" name="donation_id" value="<?php echo $donation['donation_id']; ?>">
                                 <select name="feedback">
-                                    <option value="Good">Good</option>
-                                    <option value="Average">Average</option>
-                                    <option value="Rotten">Rotten</option>
+                                    <option value="Good" <?php if ($donation['feedback'] == 'Good') echo 'selected'; ?>>Good</option>
+                                    <option value="Average" <?php if ($donation['feedback'] == 'Average') echo 'selected'; ?>>Average</option>
+                                    <option value="Rotten" <?php if ($donation['feedback'] == 'Rotten') echo 'selected'; ?>>Rotten</option>
                                 </select>
                                 <button type="submit">Submit Feedback</button>
                             </form>
-
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <?php if (isset($message)): ?>
-        <p><?php echo htmlspecialchars($message); ?></p>
+        <script>alert('<?php echo $message; ?>');</script>
     <?php endif; ?>
 
 </body>

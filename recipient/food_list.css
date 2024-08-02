@@ -47,7 +47,8 @@ header {
 .food-item {
     background-color: #fff;
     border: 2px solid #ff4500;
-    width: 200px;
+    height: 150px;
+    width: 300px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -88,6 +89,7 @@ button:hover {
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    margin-left: 10px;
 }
 
 select[name="feedback"] {
