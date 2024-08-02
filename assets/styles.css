@@ -93,6 +93,11 @@ h2 {
     margin-bottom: 1rem;
 }
 
+h4 {
+    text-align: center;
+    font-size: larger;
+}
+
 .stats {
     display: flex;
     justify-content: space-around;
