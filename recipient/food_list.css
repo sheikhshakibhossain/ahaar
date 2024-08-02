@@ -69,7 +69,8 @@ header {
 }
 
 button {
-    background-color: #ff4500;
+    background: linear-gradient(135deg, #30b7e6, #3aaa3c);
+    border-radius: 10px;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -77,5 +78,46 @@ button {
 }
 
 button:hover {
+    background-color: #e63900;
+}
+
+
+/* Dropdown button */
+.food-item form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+select[name="feedback"] {
+    border: 1px solid #ff4500;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    padding: 8px;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    width: 120px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+select[name="feedback"]:hover {
+    background: #f1f1f1;
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #30b7e6, #3aaa3c);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
     background-color: #e63900;
 }

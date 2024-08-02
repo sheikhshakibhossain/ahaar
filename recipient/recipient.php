@@ -30,8 +30,20 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
     $donations[] = $donation_row;
 }
 
-?>
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $donation_id = mysqli_real_escape_string($connect, $_POST['donation_id']);
+    $feedback = mysqli_real_escape_string($connect, $_POST['feedback']);
+    $email = $_SESSION['email'];
 
+    $query = "UPDATE donation_taken SET feedback = '$feedback' WHERE donation_id = '$donation_id' AND recipient_email = '$email'";
+    if (mysqli_query($connect, $query)) {
+        $message = 'Feedback updated successfully';
+    } else {
+        $message = 'Failed to update feedback';
+    }
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -89,13 +101,26 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
                             <h3><?php echo $donation['food_name']; ?></h3>
                             <p>Location: <?php echo $donation['location']; ?></p>
                             <p>Expires on: <?php echo $donation['expire_date_time']; ?></p>
-                            <a href="report_donation.php?id=<?php echo $donation['donation_id']?>"><button>Report</button></a>
+                            <form method="POST" class="food-item-form">
+                                <input type="hidden" name="donation_id" value="<?php echo $donation['donation_id']; ?>">
+                                <select name="feedback">
+                                    <option value="Good">Good</option>
+                                    <option value="Average">Average</option>
+                                    <option value="Rotten">Rotten</option>
+                                </select>
+                                <button type="submit">Submit Feedback</button>
+                            </form>
+
                         </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </div>
     </div>
+
+    <?php if (isset($message)): ?>
+        <p><?php echo htmlspecialchars($message); ?></p>
+    <?php endif; ?>
 
 </body>
 </html>
