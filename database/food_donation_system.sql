@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 03, 2024 at 09:54 AM
+-- Generation Time: Aug 03, 2024 at 01:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,6 +38,16 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`email`, `passwd`) VALUES
 ('shakib221@gmail.com', 'meaw');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blocklist`
+--
+
+CREATE TABLE `blocklist` (
+  `user_email` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -79,10 +89,10 @@ CREATE TABLE `donation` (
 --
 
 INSERT INTO `donation` (`donation_id`, `food_name`, `quantity`, `location`, `postal_code`, `expire_date_time`, `donor_email`, `quantity_available`) VALUES
-(1, 'Dim Khichuri', 50, 'Tipu Sultan Road', '1100', '2024-08-10 17:40:00', 'shakib221@gmail.com', 39),
+(1, 'Dim Khichuri', 50, 'Tipu Sultan Road', '1100', '2024-08-10 17:40:00', 'shakib221@gmail.com', 38),
 (2, 'Dal Bhat', 60, 'Tipu Sultan Road', '1100', '2024-07-29 22:44:00', 'shakib221@gmail.com', 59),
-(3, 'Egg Noodles', 70, 'Mirpur 10', '1216', '2024-08-10 20:01:00', 'riana221@gmail.com', 57),
-(4, 'Egg Noodles', 60, 'Uttar Badda', '1212', '2024-08-16 12:05:00', 'sauda221@gmail.com', 58),
+(3, 'Egg Noodles', 70, 'Mirpur 10', '1216', '2024-08-10 20:01:00', 'riana221@gmail.com', 56),
+(4, 'Egg Noodles', 60, 'Uttar Badda', '1212', '2024-08-16 12:05:00', 'sauda221@gmail.com', 57),
 (5, 'Ruti Vaji', 50, 'Tipu Sultan Road', '1100', '2024-03-19 01:40:00', 'shakib221@gmail.com', 50),
 (6, 'Chicken curry and rice', 2, 'Mirpur', '456', '2024-07-31 16:08:00', 'shamia221@gmail.com', 1);
 
@@ -110,10 +120,13 @@ INSERT INTO `donation_taken` (`donation_id`, `recipient_email`, `feedback`) VALU
 (4, 'sauda221@gmail.com', 'Rotten'),
 (1, 'shakib221@gmail.com', 'Average'),
 (3, 'shakib221@gmail.com', 'Rotten'),
-(6, 'shamia221@gmail.com', NULL),
+(6, 'shamia221@gmail.com', 'Rotten'),
 (1, 'riana221@gmail.com', 'Good'),
 (3, 'riana221@gmail.com', 'Average'),
-(4, 'riana221@gmail.com', 'Rotten');
+(4, 'riana221@gmail.com', 'Rotten'),
+(1, 'shamia221@gmail.com', 'Good'),
+(3, 'shamia221@gmail.com', 'Rotten'),
+(4, 'shamia221@gmail.com', 'Rotten');
 
 -- --------------------------------------------------------
 
@@ -235,7 +248,29 @@ INSERT INTO `sponsors_application` (`email`, `description`, `status`) VALUES
 ('shakib221@gmail.com', 'I\'ve a restaurant.  I can donate daily.', 'accepted'),
 ('riana221@gmail.com', 'I\'ve a restaurant.  I can donate daily.', 'accepted'),
 ('sauda221@gmail.com', 'I\'ve a restaurant.  I can donate daily.', 'accepted'),
-('shamia221@gmail.com', 'I\'ve a restaurant.  I can donate daily.', 'accepted');
+('shamia221@gmail.com', 'I\'ve a restaurant.  I can donate daily.', 'accepted'),
+('shamia221@gmail.com', 'I have a restaurant. Everyday I have much food to donate.', 'accepted');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `warning_table`
+--
+
+CREATE TABLE `warning_table` (
+  `user_email` varchar(64) DEFAULT NULL,
+  `warning_text` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `warning_table`
+--
+
+INSERT INTO `warning_table` (`user_email`, `warning_text`, `id`) VALUES
+('shamia221@gmail.com', 'valo hoye jao masud', 1),
+('shakib221@gmail.com', 'valo hoye jao shakib', 2),
+('shakib221@gmail.com', 'valo hoye jao shakib (2)', 3);
 
 --
 -- Indexes for dumped tables
@@ -266,6 +301,12 @@ ALTER TABLE `recipient`
   ADD PRIMARY KEY (`recipient_id`);
 
 --
+-- Indexes for table `warning_table`
+--
+ALTER TABLE `warning_table`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -292,6 +333,12 @@ ALTER TABLE `donor`
 --
 ALTER TABLE `recipient`
   MODIFY `recipient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1030;
+
+--
+-- AUTO_INCREMENT for table `warning_table`
+--
+ALTER TABLE `warning_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -7,6 +7,21 @@ require_once('../dbconfig.php');
 $connect = mysqli_connect(HOST, USER, PASS, DB) or die("Can not connect");
 
 $email = $_SESSION['email'];
+
+$query_blocklist = "SELECT COUNT(*) FROM `blocklist` WHERE user_email = '$email'";
+$result_blocklist = mysqli_query($connect, $query_blocklist);
+$check_blocklist = mysqli_fetch_array($result_blocklist)[0];
+
+if ($check_blocklist > 0) {
+    include("../session.php");
+    session_unset(); 
+    session_destroy();
+    echo "<script>
+        alert('You\'ve been banned. Contact Admin!');
+        window.location.href = '../index.php';
+    </script>";
+}
+
 $query_ = "SELECT name, phone, address, gender FROM donor WHERE email = '$email'";
 $result_ = mysqli_query($connect, $query_);
 $row = mysqli_fetch_array($result_);
