@@ -25,6 +25,11 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
     $donations[] = $donation_row;
 }
 
+// Fetch the latest disaster alert
+$alert_query = "SELECT warning_text FROM warning_table WHERE user_email = '$email' ORDER BY id DESC LIMIT 1";
+$alert_result = mysqli_query($connect, $alert_query);
+$latest_alert = mysqli_fetch_array($alert_result)['warning_text'];
+
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +41,101 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="food_list.css">
     <title>Donor's Profile</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        /* Style for the floating notification button */
+        .floating-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #ff5050;
+            background: linear-gradient(135deg, #523aaa, #e66565);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            margin-bottom: 10;
+        }
+        .floating-btn:hover {
+            background-color: #e04e4e;
+        }
+        .floating-btn i {
+            font-size: 24px;
+            line-height: 1; /* This ensures the icon is vertically centered */
+        }
+        /* Style for the alert modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0, 0, 0); 
+            background-color: rgba(0, 0, 0, 0.4); 
+            padding-top: 60px;
+        }
+        .modal-content {
+            position: fixed;
+            bottom: 90px;
+            right: 40px;
+            background: linear-gradient(135deg, #523aaa, #e66565);
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: larger;
+            color: white;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // Function to show alert notification
+        function showAlert() {
+            var alertMessage = "<?php echo htmlspecialchars($latest_alert); ?>";
+            if (alertMessage) {
+                var modal = document.getElementById("alertModal");
+                var modalContent = document.getElementById("modalContent");
+                modalContent.innerHTML = "<b>Message from Admin:</b> " + alertMessage + ".<br><br><b>Note:</b> Admin can ban you in case of similar mistakes ever happend again.";
+                modal.style.display = "block";
+            } else {
+                var modal = document.getElementById("alertModal");
+                var modalContent = document.getElementById("modalContent");
+                modalContent.innerHTML = "No Message from Admin";
+                modal.style.display = "block";
+            }
+        }
+
+        // Function to close the alert modal
+        function closeModal() {
+            var modal = document.getElementById("alertModal");
+            modal.style.display = "none";
+        }
+    </script>
+
 </head>
 <body>
 
@@ -94,6 +194,19 @@ while ($donation_row = mysqli_fetch_assoc($donations_result)) {
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
+        </div>
+    </div>
+
+    <!-- Floating Notification Button -->
+    <button class="floating-btn" onclick="showAlert()">
+        <i class="bi-bell"></i>
+    </button>
+
+    <!-- Alert Modal -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalContent"></p>
         </div>
     </div>
 
