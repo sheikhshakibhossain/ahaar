@@ -59,6 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo "<script>alert('Failed to issue warning! " . mysqli_error($connect) . "');</script>";
         }
+    } else if ($action == "alert") {
+        $alert_text = mysqli_real_escape_string($connect, $_POST['alert_text']);
+        $query_alert = "INSERT INTO disaster_alert(title) VALUES ('$alert_text')";
+        if (mysqli_query($connect, $query_alert)) {
+            echo "<script>alert('Alert submitted!');</script>";
+        } else {
+            echo "<script>alert('Failed to submit alert! " . mysqli_error($connect) . "');</script>";
+        }
     }
     echo "<script>window.location.href = 'dashboard.php';</script>";
 }
@@ -82,7 +90,7 @@ $result_rotten = mysqli_query($connect, $query_rotten);
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Review Sponsor Applications</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -109,6 +117,21 @@ $result_rotten = mysqli_query($connect, $query_rotten);
             <?php else: ?>
                 <p>No queued applications.</p>
             <?php endif; ?>
+        </div>
+        <br><br><br>
+        <div class="title">Make a Alert</div>
+        <div class="content">
+            
+            <div class="input-box">
+                <span class="details">Description: <?php echo $row['description']; ?></span>
+            </div>
+            <form action="dashboard.php" method="POST">
+                <div>
+                    <input type="text" name="alert_text" placeholder="Enter Alert description">
+                    <button type="submit" name="action" value="alert">Submit</button>
+                </div>
+            </form>
+                   
         </div>
         <br><br><br>
         <a href="../logout.php"><button>Logout</button></a>
