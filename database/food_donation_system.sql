@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 30, 2024 at 02:10 PM
+-- Generation Time: Aug 03, 2024 at 09:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -79,10 +79,10 @@ CREATE TABLE `donation` (
 --
 
 INSERT INTO `donation` (`donation_id`, `food_name`, `quantity`, `location`, `postal_code`, `expire_date_time`, `donor_email`, `quantity_available`) VALUES
-(1, 'Dim Khichuri', 50, 'Tipu Sultan Road', '1100', '2024-08-10 17:40:00', 'shakib221@gmail.com', 40),
+(1, 'Dim Khichuri', 50, 'Tipu Sultan Road', '1100', '2024-08-10 17:40:00', 'shakib221@gmail.com', 39),
 (2, 'Dal Bhat', 60, 'Tipu Sultan Road', '1100', '2024-07-29 22:44:00', 'shakib221@gmail.com', 59),
-(3, 'Egg Noodles', 70, 'Mirpur 10', '1216', '2024-08-10 20:01:00', 'riana221@gmail.com', 58),
-(4, 'Egg Noodles', 60, 'Uttar Badda', '1212', '2024-08-16 12:05:00', 'sauda221@gmail.com', 59),
+(3, 'Egg Noodles', 70, 'Mirpur 10', '1216', '2024-08-10 20:01:00', 'riana221@gmail.com', 57),
+(4, 'Egg Noodles', 60, 'Uttar Badda', '1212', '2024-08-16 12:05:00', 'sauda221@gmail.com', 58),
 (5, 'Ruti Vaji', 50, 'Tipu Sultan Road', '1100', '2024-03-19 01:40:00', 'shakib221@gmail.com', 50),
 (6, 'Chicken curry and rice', 2, 'Mirpur', '456', '2024-07-31 16:08:00', 'shamia221@gmail.com', 1);
 
@@ -94,22 +94,26 @@ INSERT INTO `donation` (`donation_id`, `food_name`, `quantity`, `location`, `pos
 
 CREATE TABLE `donation_taken` (
   `donation_id` int(11) NOT NULL,
-  `recipient_email` varchar(64) DEFAULT NULL
+  `recipient_email` varchar(64) DEFAULT NULL,
+  `feedback` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `donation_taken`
 --
 
-INSERT INTO `donation_taken` (`donation_id`, `recipient_email`) VALUES
-(1, 'sauda221@gmail.com'),
-(1, 'sauda221@gmail.com'),
-(2, 'sauda221@gmail.com'),
-(3, 'sauda221@gmail.com'),
-(4, 'sauda221@gmail.com'),
-(1, 'shakib221@gmail.com'),
-(3, 'shakib221@gmail.com'),
-(6, 'shamia221@gmail.com');
+INSERT INTO `donation_taken` (`donation_id`, `recipient_email`, `feedback`) VALUES
+(1, 'sauda221@gmail.com', 'Good'),
+(1, 'sauda221@gmail.com', 'Good'),
+(2, 'sauda221@gmail.com', 'Average'),
+(3, 'sauda221@gmail.com', 'Rotten'),
+(4, 'sauda221@gmail.com', 'Rotten'),
+(1, 'shakib221@gmail.com', 'Average'),
+(3, 'shakib221@gmail.com', 'Rotten'),
+(6, 'shamia221@gmail.com', NULL),
+(1, 'riana221@gmail.com', 'Good'),
+(3, 'riana221@gmail.com', 'Average'),
+(4, 'riana221@gmail.com', 'Rotten');
 
 -- --------------------------------------------------------
 
@@ -187,7 +191,9 @@ INSERT INTO `recipient` (`recipient_id`, `name`, `email`, `passwd`, `phone`, `ge
 (1024, 'guest', 'guest17@ahaar.com', '1234', '016368123', 'Female', 'Dhaka', 1150),
 (1025, 'guest', 'guest18@ahaar.com', '1234', '016368123', 'Female', 'Dhaka', 1150),
 (1026, 'guest', 'guest19@ahaar.com', '1234', '016368123', 'Female', 'Dhaka', 1150),
-(1027, 'guest', 'guest20@ahaar.com', '1234', '016368123', 'Female', 'Dhaka', 1150);
+(1027, 'guest', 'guest20@ahaar.com', '1234', '016368123', 'Female', 'Dhaka', 1150),
+(1028, 'Afrina Riana', 'riana221@gmail.com', '1234', '018123132123', 'Female', 'Mirpur, Dhaka', 1216),
+(1029, 'Shamia Islam', 'shamia221@gmail.com', '1234', '018123132122', 'Female', 'Mirpur, Dhaka', 1216);
 
 -- --------------------------------------------------------
 
@@ -285,7 +291,7 @@ ALTER TABLE `donor`
 -- AUTO_INCREMENT for table `recipient`
 --
 ALTER TABLE `recipient`
-  MODIFY `recipient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1028;
+  MODIFY `recipient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1030;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
