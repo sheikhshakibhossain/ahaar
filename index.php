@@ -208,8 +208,7 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
 
     <section id="hero">
         <div class="hero-content">
-            <h2>Help End Hunger in Our Community</h2>
-            <p>Donate food and make a difference today.</p>
+            <h2>Your small contribution can make a huge difference</h2>
             <button onclick="window.location.href='events.php'">Upcoming Events</button>
             <button onclick="window.location.href='sponsors.php'">Our Sponsors</button>
             <button onclick="window.location.href='#get-involved'">Get Involved</button>
@@ -218,21 +217,21 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
 
     <section id="about">
         <div class="container">
-            <h2>Donation Statistics</h2>
+            <h2 style="color: #229799">Thinking of why you should chose us?</h2>
             <!-- <h4>Our mission is to end hunger in our community by facilitating food donations to recipients.</h4> -->
             <div class="stats">
                 <div>
+                    <h3 style="color: #35374B">Food Ratings</h3>
                     <canvas id="donationFeedbackChart"></canvas>
                 </div>
 
                 <div>
+                    <h3 style="color: #35374B">Sponsor's Contribution</h3>
                     <canvas id="donationByTypeChart"></canvas>
                 </div>
 
-                <div class="chart-container">
-                    <div class="meals-info">
-                        <p>Carbon Emmition Reduced</p>
-                    </div>
+                <div>
+                    <h3 style="color: #35374B">Carbon Emission</h3>
                     <canvas id="pieChart"></canvas>
                 </div>
 
