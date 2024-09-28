@@ -65,7 +65,7 @@ $latest_alert = mysqli_fetch_array($alert_result)['warning_text'];
             bottom: 40px;
             right: 40px;
             background-color: #ff5050;
-            background: linear-gradient(135deg, #523aaa, #e66565);
+            background: linear-gradient(135deg, #30b7e6, #3aaa3c);
             color: white;
             border: none;
             border-radius: 50%;
@@ -76,34 +76,37 @@ $latest_alert = mysqli_fetch_array($alert_result)['warning_text'];
             align-items: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s;
-            margin-bottom: 10;
         }
+
         .floating-btn:hover {
             background-color: #e04e4e;
         }
+
         .floating-btn i {
             font-size: 24px;
-            line-height: 1; /* This ensures the icon is vertically centered */
         }
+
         /* Style for the alert modal */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0, 0, 0); 
-            background-color: rgba(0, 0, 0, 0.4); 
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
             padding-top: 60px;
         }
+
         .modal-content {
+            /* background-color: #fefefe; */
             position: fixed;
             bottom: 90px;
             right: 40px;
-            background: linear-gradient(135deg, #523aaa, #e66565);
+            background: linear-gradient(135deg, #30b7e6, #3aaa3c);
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
@@ -114,17 +117,34 @@ $latest_alert = mysqli_fetch_array($alert_result)['warning_text'];
             font-size: larger;
             color: white;
         }
+
         .close {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
+
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .meals-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .meals-info h3 {
+            margin-bottom: 5px;
         }
     </style>
     <script>

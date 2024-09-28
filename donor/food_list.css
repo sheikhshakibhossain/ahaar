@@ -4,7 +4,7 @@ body {
 
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #e66565, #523aaa);
+    background: linear-gradient(135deg, #227caf, #2f8b31);
 }
 
 header {
@@ -23,7 +23,8 @@ header {
 
 .donated-foods {
     background-color: #fff;
-    border: 2px solid #ff4500;
+    /* border: 2px solid #ff4500; */
+    border-radius: 10px;
     width: 80%;
     max-width: 1200px;
     padding: 20px;
@@ -32,7 +33,7 @@ header {
 }
 
 .donated-foods h2 {
-    color: #ff4500;
+    color: black;
     text-align: center;
 }
 
@@ -45,10 +46,11 @@ header {
 
 .food-item {
     background-color: #fff;
-    border: 2px solid #ff4500;
+    border: 2px solid black;
     width: 200px;
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .food-item img {
@@ -68,11 +70,12 @@ header {
 }
 
 button {
-    background-color: #ff4500;
+    background: linear-gradient(135deg, #227caf, #2f8b31);
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    border-radius: 12px;
 }
 
 button:hover {

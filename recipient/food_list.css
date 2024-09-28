@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     /* background: linear-gradient(135deg, #71b7e6, #aa3a3a); */
-    background: linear-gradient(135deg, #6e3c77, #ffc400ea);
+    background: linear-gradient(135deg, #227caf, #2f8b31);
 }
 
 header {
@@ -24,7 +24,8 @@ header {
 
 .donated-foods {
     background-color: #fff;
-    border: 2px solid #ff4500;
+    /* border: 2px solid #ff4500; */
+    border-radius: 10px;
     width: 80%;
     max-width: 1200px;
     padding: 20px;
@@ -46,7 +47,7 @@ header {
 
 .food-item {
     background-color: #fff;
-    border: 2px solid #ff4500;
+    border: 2px solid black
     height: 150px;
     width: 300px;
     text-align: center;

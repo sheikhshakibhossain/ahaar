@@ -20,6 +20,18 @@ $alert_query = "SELECT title FROM disaster_alert ORDER BY id DESC LIMIT 1";
 $alert_result = mysqli_query($connect, $alert_query);
 $latest_alert = mysqli_fetch_array($alert_result)['title'];
 
+$data = [
+    'Red' => 30,
+    'Blue' => 50,
+    'Green' => 20
+];
+
+// Convert the data to JSON for use in JavaScript
+$jsonData = json_encode($data);
+
+// Sample value for meals donated
+$meals_donated = 1000; // Replace this with your actual value
+
 ?>
 
 
@@ -28,12 +40,14 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A H A A R</title>
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Style for the floating notification button */
         .floating-btn {
@@ -53,26 +67,30 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s;
         }
+
         .floating-btn:hover {
             background-color: #e04e4e;
         }
+
         .floating-btn i {
             font-size: 24px;
         }
+
         /* Style for the alert modal */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0, 0, 0); 
-            background-color: rgba(0, 0, 0, 0.4); 
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
             padding-top: 60px;
         }
+
         .modal-content {
             /* background-color: #fefefe; */
             position: fixed;
@@ -89,17 +107,34 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
             font-size: larger;
             color: white;
         }
+
         .close {
             color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
         }
+
         .close:hover,
         .close:focus {
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .meals-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .meals-info h3 {
+            margin-bottom: 5px;
         }
     </style>
     <script>
@@ -161,6 +196,48 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
                     <h3><?php echo $helped_people; ?></h3>
                     <p>Families Helped</p>
                 </div>
+
+                <div class="chart-container">
+                    <div class="meals-info">
+                        <p>Carbon Emmition Reduced</p>
+                    </div>
+                    <canvas id="pieChart"></canvas>
+                </div>
+
+                <script>
+                    // Parse the PHP data
+                    var data = <?php echo $jsonData; ?>;
+
+                    // Prepare the data for Chart.js
+                    var labels = Object.keys(data);
+                    var values = Object.values(data);
+
+                    // Create the pie chart
+                    var ctx = document.getElementById('pieChart').getContext('2d');
+                    var pieChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: values,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.8)',
+                                    'rgba(54, 162, 235, 0.8)',
+                                    'rgba(255, 206, 86, 0.8)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            title: {
+                                display: true,
+                                text: 'Donation Distribution'
+                            }
+                        }
+                    });
+                </script>
+
             </div>
         </div>
     </section>
@@ -230,4 +307,5 @@ $latest_alert = mysqli_fetch_array($alert_result)['title'];
     </div>
 
 </body>
+
 </html>
