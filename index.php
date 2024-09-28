@@ -20,17 +20,48 @@ $alert_query = "SELECT title FROM disaster_alert ORDER BY id DESC LIMIT 1";
 $alert_result = mysqli_query($connect, $alert_query);
 $latest_alert = mysqli_fetch_array($alert_result)['title'];
 
-$data = [
-    'Red' => 30,
-    'Blue' => 50,
-    'Green' => 20
-];
+$sql = "SELECT donation_taken.feedback, SUM(donation.quantity) AS total_quantity
+            FROM donation
+            INNER JOIN donation_taken ON donation.donation_id = donation_taken.donation_id
+            GROUP BY donation_taken.feedback";
+$chart_1 = mysqli_query($connect, $sql);
 
-// Convert the data to JSON for use in JavaScript
-$jsonData = json_encode($data);
+// Initialize arrays for labels and data
+$labels = [];
+$data = [];
 
-// Sample value for meals donated
-$meals_donated = 1000; // Replace this with your actual value
+// Fetch results from the query
+while ($row = mysqli_fetch_assoc($chart_1)) {
+    $labels[] = $row['feedback'];         // Feedback labels (Good, Rotten, Average)
+    $data[] = $row['total_quantity'];     // Total quantity of donations per feedback
+}
+
+$chart2_sql = "SELECT donor.name AS donor_name,
+IF(sponsors.email IS NOT NULL, 'Sponsor', 'Regular Donor') AS donor_type,
+COALESCE(SUM(donation.quantity), 0) AS total_quantity
+FROM donor
+LEFT JOIN donation ON donor.email = donation.donor_email
+LEFT JOIN sponsors ON donor.email = sponsors.email
+GROUP BY donor.email";
+
+$chart_2 = mysqli_query($connect, $chart2_sql);
+
+// Initialize arrays for labels and data
+$labels_2 = [];
+$data_2 = [];
+
+// Fetch chart_2s from the query
+if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
+    while ($row = mysqli_fetch_assoc($chart_2)) {
+        // Include both sponsors and regular donors, but exclude those with no donations
+        if ($row['total_quantity'] > 0) {
+            $labels_2[] = $row['donor_type'] . ' (' . $row['donor_name'] . ')';  // e.g., Sponsor (John Doe)
+            $data_2[] = $row['total_quantity'];   // Total quantity of donations for that donor
+        }
+    }
+} else {
+    echo "<p>No results found from the database query.</p>";
+}
 
 ?>
 
@@ -136,6 +167,8 @@ $meals_donated = 1000; // Replace this with your actual value
         .meals-info h3 {
             margin-bottom: 5px;
         }
+
+        .div2 {}
     </style>
     <script>
         // Function to show alert notification
@@ -185,16 +218,15 @@ $meals_donated = 1000; // Replace this with your actual value
 
     <section id="about">
         <div class="container">
-            <h2>About Us</h2>
-            <h4>Our mission is to end hunger in our community by facilitating food donations to recipients.</h4>
+            <h2>Donation Statistics</h2>
+            <!-- <h4>Our mission is to end hunger in our community by facilitating food donations to recipients.</h4> -->
             <div class="stats">
                 <div>
-                    <h3><?php echo $meals_donated; ?></h3>
-                    <p>Meals Donated</p>
+                    <canvas id="donationFeedbackChart"></canvas>
                 </div>
+
                 <div>
-                    <h3><?php echo $helped_people; ?></h3>
-                    <p>Families Helped</p>
+                    <canvas id="donationByTypeChart"></canvas>
                 </div>
 
                 <div class="chart-container">
@@ -205,37 +237,89 @@ $meals_donated = 1000; // Replace this with your actual value
                 </div>
 
                 <script>
-                    // Parse the PHP data
-                    var data = <?php echo $jsonData; ?>;
-
-                    // Prepare the data for Chart.js
-                    var labels = Object.keys(data);
-                    var values = Object.values(data);
-
-                    // Create the pie chart
-                    var ctx = document.getElementById('pieChart').getContext('2d');
-                    var pieChart = new Chart(ctx, {
-                        type: 'pie',
+                    const cty = document.getElementById('donationFeedbackChart').getContext('2d');
+                    const donationFeedbackChart = new Chart(cty, {
+                        type: 'bar', // Bar chart for comparison
                         data: {
-                            labels: labels,
+                            labels: <?php echo json_encode($labels); ?>, // Feedback labels (Good, Rotten, Average)
                             datasets: [{
-                                data: values,
+                                label: 'Total Donations (Quantity)',
+                                data: <?php echo json_encode($data); ?>, // Total quantity of donations
                                 backgroundColor: [
-                                    'rgba(255, 99, 132, 0.8)',
-                                    'rgba(54, 162, 235, 0.8)',
-                                    'rgba(255, 206, 86, 0.8)'
-                                ]
+                                    'rgba(255, 206, 86, 0.9)',
+                                    'rgba(75, 192, 192, 0.9)',
+                                    'rgba(255, 0, 0, 0.9)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(255, 99, 132, 1)'
+                                ],
+                                borderWidth: 1
                             }]
                         },
                         options: {
                             responsive: true,
-                            maintainAspectRatio: true,
-                            title: {
-                                display: true,
-                                text: 'Donation Distribution'
+                            scales: {
+                                x: {
+                                    display: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Feedback Rating'
+                                    }
+                                },
+                                y: {
+                                    display: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Total Quantity of Donations'
+                                    },
+                                    beginAtZero: true
+                                }
                             }
                         }
                     });
+
+                    // Function to generate a random color
+                    function generateUniqueColor() {
+                        const randomColor = () => Math.floor(Math.random() * 256); // Random RGB values
+                        return `rgba(${randomColor()}, ${randomColor()}, ${randomColor()}, 0.6)`; // RGBA format with opacity
+                    }
+
+                    // Create an array of unique colors based on the number of labels
+                    const uniqueColors = Array.from({ length: <?php echo count($labels_2); ?> }, generateUniqueColor);
+
+                    const ctz = document.getElementById('donationByTypeChart').getContext('2d');
+                    const donationByTypeChart = new Chart(ctz, {
+                        type: 'pie', // Pie chart to compare donations by type
+                        data: {
+                            labels: <?php echo json_encode($labels_2); ?>, // Labels: Sponsor (John Doe) or Regular Donor (Jane Doe)
+                            datasets: [{
+                                label: 'Total Donations (Quantity)',
+                                data: <?php echo json_encode($data_2); ?>,  // Total quantity of donations for each donor
+                                backgroundColor: uniqueColors, // Use dynamically generated unique colors
+                                borderColor: uniqueColors.map(color => color.replace(/rgba\((\d+), (\d+), (\d+), (\d+)\)/, 'rgba($1, $2, $3, 1)')), // Corresponding border colors
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return `${tooltipItem.label}: ${tooltipItem.raw}`; // Customize tooltip label
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
                 </script>
 
             </div>

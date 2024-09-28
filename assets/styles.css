@@ -106,10 +106,11 @@ h4 {
 
 .stats div {
     /* background-color: #4CAF50; */
-    background: linear-gradient(135deg, #30b7e6, #3aaa3c);
+    background: linear-gradient(135deg, #b4ddd0, #8ff7b7);
     color: white;
     padding: 1rem;
     border-radius: 8px;
+    margin-left: 10px;
 }
 
 .steps {
