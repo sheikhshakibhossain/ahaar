@@ -111,14 +111,16 @@
 <body>
     
 <div id="container">
-    <h2>Who is a Sponsor? 📣</h2>
+    <h2>Who Can Be a Sponsor? 📣</h2>
     <h3 style="color: #E1F7F5">
-        Donor who are willing to donate in a daily basis. 
-        For an example, if you're a restaurant owner or someone with huge food stocks,
-        you can donate your extra foods daily. If you agree with this simple term that 
-        you will donate (daily/some days in a week/weekly/monthly), 
-        you can apply for the <a href="apply_for_sponsorship.php" style="color: #E1F7F5">Sponsor's</a> title 📝🤝🏻
+        Are you a restaurant owner, food supplier, or someone with extra resources looking to make a difference? Sponsors are donors who commit to regular food donations whether it’s daily, weekly, or even monthly. 🌟
+        <br><br>
+        As a sponsor, your contributions play a vital role in fighting hunger and ensuring that no food goes to waste. By partnering with us, you're not only helping those in need but also becoming part of a larger movement to make our community stronger and more resilient. 🤝
+        <br><br>
+        If you have surplus food and believe in giving back, you can apply for the 
+        <a href="apply_for_sponsorship.php" style="color: #E1F7F5">Sponsor's</a> title 📝, and start making a lasting impact today!
     </h3>
+
     <br> <br>
 </div>
 
