@@ -63,6 +63,23 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
     echo "<p>No results found from the database query.</p>";
 }
 
+
+$bangladesh_daily_emissions = 4250000 * 0.1294; // 42.5 million kg CO2e (Bangladesh food waste emissions)
+$dhaka_daily_emissions = $bangladesh_daily_emissions * 0.25; // 25% of Bangladesh emissions from Dhaka
+$donation_service_reduction = $meals_donated * 0.35 * 2.5; // (food)kg × 2.5kg CO2e/kg= N kg CO2e
+$data_3 = [
+    'Bangladesh' => $bangladesh_daily_emissions,
+    'Dhaka' => $dhaka_daily_emissions,
+    'Reduced by us' => $donation_service_reduction
+];
+
+// Convert the data_3 to JSON for use in JavaScript
+$jsondata_3 = json_encode($data_3);
+
+// Calculate total and percentage
+$total_emissions = $bangladesh_daily_emissions + $dhaka_daily_emissions + $donation_service_reduction;
+$reduction_percentage = ($donation_service_reduction / $total_emissions) * 100;
+
 ?>
 
 
@@ -217,7 +234,7 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
 
     <section id="about">
         <div class="container">
-            <h2 style="color: #229799">Thinking of why you should chose us?</h2>
+            <h2 style="color: #229799">Thinking of why you should choose us?</h2>
             <!-- <h4>Our mission is to end hunger in our community by facilitating food donations to recipients.</h4> -->
             <div class="stats">
                 <div>
@@ -231,8 +248,8 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
                 </div>
 
                 <div>
-                    <h3 style="color: #35374B">Carbon Emission</h3>
-                    <canvas id="pieChart"></canvas>
+                    <h3 style="color: #35374B">Carbon Emission Statistics</h3>
+                    <canvas id="emissionsChart" width="400" height="400"></canvas>
                 </div>
 
                 <script>
@@ -319,6 +336,60 @@ if ($chart_2 && mysqli_num_rows($chart_2) > 0) {
                         }
                     });
 
+                </script>
+
+                <script>
+                    // PHP data passed to JavaScript
+                    const data_3 = <?php echo $jsondata_3; ?>;
+
+                    // Create the chart
+                    const ctx = document.getElementById('emissionsChart').getContext('2d');
+                    const emissionsChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: Object.keys(data_3), // Keep the x-axis labels (Bangladesh, Dhaka, etc.)
+                            datasets: [{
+                                label: null, // Set dataset label to null
+                                data: Object.values(data_3), // The values for emissions
+                                backgroundColor: ['#34d8eb', '#c034eb', '#ebdb34']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    type: 'logarithmic', // Use a logarithmic scale for y-axis
+                                    ticks: {
+                                        beginAtZero: true,
+                                        font: {
+                                            size: 12
+                                        }
+                                    },
+                                    title: {
+                                        display: false // Hide the y-axis title
+                                    },
+                                    grid: {
+                                        color: '#E0E0E0'
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false, // Completely disable the legend
+                                },
+                                title: {
+                                    display: false, // Completely disable the chart title
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            return `${tooltipItem.raw.toLocaleString()} kg CO2e`; // Custom tooltip without a label
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
                 </script>
 
             </div>
